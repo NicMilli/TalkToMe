@@ -1,7 +1,11 @@
 import Link from 'next/link'
-import UserButton from '../components/UserButton'
+import UserButton from '@/src/components/UserButton'
+import { auth } from '@clerk/nextjs'
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth()
+
+  let href = userId ? '/home' : '/new-user'
   return (
     <div className="w-screen h-screen homeColor flex justify-center items-center">
       <div className="bubble a"></div>
@@ -21,7 +25,7 @@ export default function Home() {
           Elevate your speech skills to conquer the virtual world
         </p>
         <div>
-          <Link href="/home">
+          <Link href={href}>
             <button className="bg-purple-600 px-4 py-2 rounded-lg text-xl">
               Get Started!
             </button>
