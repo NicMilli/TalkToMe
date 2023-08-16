@@ -7,14 +7,14 @@ const createNewUser = async () => {
   console.log(clerkUser)
   const match = await prisma.user.findUnique({
     where: {
-      clerkId: clerkUser?.id as string,
+      clerkId: clerkUser?.id as string | undefined,
     },
   })
 
   if (!match) {
     const newUser = await prisma.user.create({
       data: {
-        clerkId: clerkUser?.id,
+        clerkId: clerkUser.id,
         email: clerkUser?.emailAddresses[0].emailAddress,
       },
     })
@@ -24,7 +24,7 @@ const createNewUser = async () => {
 
 const NewUser = async () => {
   await createNewUser()
-  return <div>...loading</div>
+  return <div></div>
 }
 
 export default NewUser

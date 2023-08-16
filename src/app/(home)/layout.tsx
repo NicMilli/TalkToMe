@@ -1,8 +1,14 @@
 import { UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import FullLogo from '../FullLogo.png'
+import { ReactNode } from 'react'
 
-const NavbarLayout = ({ children }) => {
+interface Props {
+  children?: ReactNode
+  // any props that come into the component
+}
+
+const NavbarLayout = ({ children }: Props) => {
   return (
     <div className="h-screen w-screen relative">
       <aside className="absolute w-[200px] top-0 left-0 border-r border-black">
@@ -22,7 +28,9 @@ const NavbarLayout = ({ children }) => {
               </div>
 
               <div className="flex justify-between w-[50%]">
-                <button>TalkToMe</button>
+                <button className="bg-gradient-to-r from-color to-color">
+                  TalkToMe
+                </button>
                 <button>WriteMe</button>
                 <UserButton />
               </div>
